@@ -1,7 +1,6 @@
 package com.example.companies;
 
 import com.example.companies.models.Users;
-import com.example.companies.service.SimpleClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,5 +24,10 @@ public class AppController {
     @PostMapping("/users/signin")
     ResponseEntity<?> signin(@RequestBody Users userDTO) {
         return client.signin(userDTO);
+    }
+
+    @GetMapping("/users/{userId}")
+    public boolean findById(@PathVariable Integer userId) {
+        return client.findById(userId);
     }
 }

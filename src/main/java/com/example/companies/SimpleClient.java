@@ -1,4 +1,4 @@
-package com.example.companies.service;
+package com.example.companies;
 
 import com.example.companies.models.Users;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -19,4 +19,7 @@ public interface SimpleClient {
 
     @PostMapping("/users/signin")
     ResponseEntity<?> signin(@RequestBody Users user);
+
+    @GetMapping("/users/{userId}")
+    boolean findById (@PathVariable Integer userId);
 }
