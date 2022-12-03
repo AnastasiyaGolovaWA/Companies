@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "address")
 public class Address {
     @Id
-    @Column
+    @Column(name = "address_id")
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int addressId;
