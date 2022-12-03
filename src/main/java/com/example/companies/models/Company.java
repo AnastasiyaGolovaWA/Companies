@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
+
 import com.example.companies.models.Address;
 import org.checkerframework.common.aliasing.qual.Unique;
 
@@ -35,5 +37,5 @@ public class Company {
     private Address address;
 
     @Column(name = "user_id")
-    private int userId;
+    private Integer userId;
 }

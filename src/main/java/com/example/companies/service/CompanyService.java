@@ -1,0 +1,23 @@
+package com.example.companies.service;
+
+import com.example.companies.models.Company;
+import com.example.companies.repository.CompanyRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class CompanyService {
+    @Autowired
+    CompanyRepository companyRepository;
+
+    public Optional<Company> findByCompanyId(long id) {
+        return companyRepository.findById(id);
+    }
+
+    public List<Company> getAll() {
+        return companyRepository.findAll();
+    }
+}
