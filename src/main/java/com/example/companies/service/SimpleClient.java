@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(name = "SpringClient", url = "http://localhost:8090")
 public interface SimpleClient {
 
-    @GetMapping("/find/{userId}")
+    @GetMapping("/users/find/{userId}")
     Users getUser (@PathVariable Long userId);
 
-    @GetMapping("/hello")
+    @GetMapping("/users/hello")
     String getHello ();
 
-    @PostMapping("/signin")
+    @PostMapping("/users/signin")
     ResponseEntity<?> signin(@RequestBody Users user);
 }
