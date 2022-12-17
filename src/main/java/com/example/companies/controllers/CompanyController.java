@@ -5,10 +5,10 @@ import com.example.companies.models.Company;
 import com.example.companies.models.CompanyDTO;
 import com.example.companies.service.AddressService;
 import com.example.companies.service.CompanyService;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -91,7 +91,8 @@ public class CompanyController {
         if (appController.findById(company.getUserId())) {
             companyNew.setUserId(company.getUserId());
         } else {
-            return (ResponseEntity<?>) ResponseEntity.badRequest();
+            return new ResponseEntity<Object>(
+                    "Такого пользователя не существует!", new HttpHeaders(), HttpStatus.BAD_REQUEST);
         }
         companyService.save(company);
         return ResponseEntity.ok(company);
