@@ -1,6 +1,7 @@
 package com.example.companies.controllers;
 
 import com.example.companies.AppController;
+import com.example.companies.models.Address;
 import com.example.companies.models.Company;
 import com.example.companies.models.CompanyDTO;
 import com.example.companies.service.AddressService;
@@ -108,6 +109,19 @@ public class CompanyController {
         c.setName(company.getName());
         c.setShortName(company.getShortName());
         c.setOgrn(company.getOgrn());
+        c.setUserId(company.getUserId());
+
+        if (company.getAddress() != null) {
+            Address address = new Address();
+            address.setAddressId(company.getAddress().getAddressId());
+            address.setArea(company.getAddress().getArea());
+            address.setCity(company.getAddress().getCity());
+            address.setStreet(company.getAddress().getStreet());
+            address.setIndex(company.getAddress().getIndex());
+            address.setHomeNumber(company.getAddress().getHomeNumber());
+            address.setOfficeNumber(company.getAddress().getOfficeNumber());
+            c.setAddress(address);
+        }
 
         String json = new ObjectMapper().writeValueAsString(c);
 
