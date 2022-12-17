@@ -24,4 +24,8 @@ public class CompanyService {
     public List<Company> getAll() {
         return companyRepository.findAll();
     }
+
+    public Company getByCompanyId(long id) {
+        return companyRepository.getOne(id);
+    }
 }

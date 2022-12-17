@@ -5,6 +5,8 @@ import com.example.companies.models.Company;
 import com.example.companies.models.CompanyDTO;
 import com.example.companies.service.AddressService;
 import com.example.companies.service.CompanyService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -96,5 +98,25 @@ public class CompanyController {
         }
         companyService.save(company);
         return ResponseEntity.ok(company);
+    }
+
+    @GetMapping(path = "getOne/{companyId}")
+    public String getOne(@PathVariable("companyId") long companyId) throws JsonProcessingException {
+        Company company = companyService.getByCompanyId(companyId);
+        Company c = new Company();
+        c.setCompanyId(company.getCompanyId());
+        c.setName(company.getName());
+        c.setShortName(company.getShortName());
+        c.setOgrn(company.getOgrn());
+
+        String json = new ObjectMapper().writeValueAsString(c);
+
+        Object userPrettyJson = new ObjectMapper().readValue(
+                json, Company.class);
+
+        String obj = new ObjectMapper().writerWithDefaultPrettyPrinter()
+                .writeValueAsString(userPrettyJson);
+
+        return obj;
     }
 }
