@@ -21,5 +21,8 @@ public interface SimpleClient {
     ResponseEntity<?> signin(@RequestBody Users user);
 
     @GetMapping("/users/{userId}")
-    boolean findById (@PathVariable Integer userId);
+    Boolean findById (@PathVariable Integer userId);
+
+    @GetMapping("/users/getOne/{userId}")
+    String getOne (@PathVariable Integer userId);
 }

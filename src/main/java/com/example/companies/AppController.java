@@ -27,7 +27,12 @@ public class AppController {
     }
 
     @GetMapping("/users/{userId}")
-    public boolean findById(@PathVariable Integer userId) {
+    public Boolean findById(@PathVariable Integer userId) {
         return client.findById(userId);
+    }
+
+    @GetMapping("/users/getOne/{userId}")
+    public String getOne(@PathVariable Integer userId) {
+        return client.getOne(userId);
     }
 }

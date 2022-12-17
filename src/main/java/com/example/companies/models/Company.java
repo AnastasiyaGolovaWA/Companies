@@ -32,7 +32,7 @@ public class Company {
     @Column(name = "ogrn")
     private int ogrn;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "address_id", referencedColumnName = "address_id")
     private Address address;
 

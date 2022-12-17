@@ -14,7 +14,7 @@ public class Address {
     @Column(name = "address_id")
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int addressId;
+    private Long addressId;
 
     @Unique
     private int index;

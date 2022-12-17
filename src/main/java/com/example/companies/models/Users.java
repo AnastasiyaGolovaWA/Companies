@@ -20,4 +20,6 @@ public class Users {
     private String role;
 
     private String keycloak_id;
+
+    private String company_id;
 }
