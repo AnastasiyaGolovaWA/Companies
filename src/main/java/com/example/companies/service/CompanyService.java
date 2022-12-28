@@ -17,6 +17,10 @@ public class CompanyService {
         return companyRepository.findById(id);
     }
 
+    public Company findCompanyId(long id) {
+        return companyRepository.getOne(id);
+    }
+
     public Company save(Company company) {
         return companyRepository.save(company);
     }
