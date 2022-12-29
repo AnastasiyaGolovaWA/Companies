@@ -38,4 +38,7 @@ public class Company {
 
     @Column(name = "user_id")
     private Integer userId;
+
+    @Column(name = "deleted")
+    private Boolean deleted;
 }

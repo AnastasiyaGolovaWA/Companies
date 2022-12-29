@@ -14,6 +14,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,22 +106,28 @@ public class CompanyController {
     public String getOne(@PathVariable("companyId") long companyId) throws JsonProcessingException {
         Company company = companyService.getByCompanyId(companyId);
         Company c = new Company();
-        c.setCompanyId(company.getCompanyId());
-        c.setName(company.getName());
-        c.setShortName(company.getShortName());
-        c.setOgrn(company.getOgrn());
-        c.setUserId(company.getUserId());
+        if (company.getDeleted() != true) {
+            c.setCompanyId(company.getCompanyId());
+            c.setName(company.getName());
+            c.setShortName(company.getShortName());
+            c.setOgrn(company.getOgrn());
+            c.setUserId(company.getUserId());
 
-        if (company.getAddress() != null) {
-            Address address = new Address();
-            address.setAddressId(company.getAddress().getAddressId());
-            address.setArea(company.getAddress().getArea());
-            address.setCity(company.getAddress().getCity());
-            address.setStreet(company.getAddress().getStreet());
-            address.setIndex(company.getAddress().getIndex());
-            address.setHomeNumber(company.getAddress().getHomeNumber());
-            address.setOfficeNumber(company.getAddress().getOfficeNumber());
-            c.setAddress(address);
+            if (company.getAddress() != null) {
+                Address address = new Address();
+                address.setAddressId(company.getAddress().getAddressId());
+                address.setArea(company.getAddress().getArea());
+                address.setCity(company.getAddress().getCity());
+                address.setStreet(company.getAddress().getStreet());
+                address.setIndex(company.getAddress().getIndex());
+                address.setHomeNumber(company.getAddress().getHomeNumber());
+                address.setOfficeNumber(company.getAddress().getOfficeNumber());
+                c.setAddress(address);
+            }
+        }
+        else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Компания не актуальна!");
         }
 
         String json = new ObjectMapper().writeValueAsString(c);

@@ -32,4 +32,8 @@ public class CompanyService {
     public Company getByCompanyId(long id) {
         return companyRepository.getOne(id);
     }
+
+    public void updateCompanyDeleted(Integer id) {
+        companyRepository.updateCompanyDeleted(id);
+    }
 }

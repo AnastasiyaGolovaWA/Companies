@@ -29,6 +29,7 @@ public class KafkaController {
     public ResponseEntity<Object> deleteCompany(@RequestParam("companyId") String companyId) {
         if (companyService.findByCompanyId(Long.parseLong(companyId)).isPresent()) {
             this.producer.sendMessage(companyId);
+            companyService.updateCompanyDeleted(Integer.valueOf(companyId));
         } else {
             return new ResponseEntity<Object>(
                     "Такой компании не существует!", new HttpHeaders(), HttpStatus.BAD_REQUEST);
